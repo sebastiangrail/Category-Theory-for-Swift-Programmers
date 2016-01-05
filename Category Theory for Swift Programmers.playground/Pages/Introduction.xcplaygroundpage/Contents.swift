@@ -10,8 +10,8 @@ For a richer reading experience turn on rendered markup in Xcode: Editor -> Show
 - Part One
   1. [Category: The Essence of Composition](Category%20-%20The%20Essence%20of%20Composition)
   2. [Types and Functions](Types%20and%20Functions)
-  3. Categories Great and Small
-  4. Kleisli Categories
+  3. [Categories Great and Small](Categories%20Great%20and%20Small)
+  4. [Kleisli Categories](Kleisli%20Categories)
   5. Products and Coproducts
   6. Simple Algebraic Data Types
   7. Functors

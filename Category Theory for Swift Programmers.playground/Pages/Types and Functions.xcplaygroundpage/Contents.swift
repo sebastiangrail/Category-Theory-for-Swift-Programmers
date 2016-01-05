@@ -1,6 +1,6 @@
 
 /*:
-[Back](Category%20-%20The%20Essence%20of%20Composition)
+[Previous chapter](Category%20-%20The%20Essence%20of%20Composition)
 
 # Types and Functions
 
@@ -68,3 +68,4 @@ enum Boolean {
     case True, False
 }
 
+//: Have a look at the [solutions to the challanges for this chapter](Solutions%202) or go to [the next chapter](Categories%20Great%20and%20Small)

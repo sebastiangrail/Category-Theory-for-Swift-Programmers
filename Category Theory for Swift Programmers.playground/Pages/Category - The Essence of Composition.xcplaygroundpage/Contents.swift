@@ -21,6 +21,4 @@ func intAppliation (g: Int -> Int, n: Int) -> Int {
 intAppliation({$0}, n: 1)
 
 
-
-
-//: Have a look at [solutions to the challanges for this chapter](Solutions%201) or go to [the next chapter](Types%20and%20Functions)
+//: Have a look at the [solutions to the challanges for this chapter](Solutions%201) or go to [the next chapter](Types%20and%20Functions)

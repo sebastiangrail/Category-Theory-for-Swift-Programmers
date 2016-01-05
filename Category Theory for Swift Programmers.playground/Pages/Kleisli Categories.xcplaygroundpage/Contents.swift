@@ -1,6 +1,6 @@
 
 /*:
-[Back](Categories%20Great%20and%20Small)
+[Previous chapter](Categories%20Great%20and%20Small)
 
 # Kleisli Categories
 

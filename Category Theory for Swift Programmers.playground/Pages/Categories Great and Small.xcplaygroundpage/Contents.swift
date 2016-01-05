@@ -1,6 +1,6 @@
 
 /*:
-[Back](Types%20and%20Functions)
+[Previous chapter](Types%20and%20Functions)
 
 # Categories Great and Small
 
@@ -29,3 +29,4 @@ extension String: Monoid {
     }
 }
 
+//: Have a look at the [solutions to the challanges for this chapter](Solutions%203) or go to [the next chapter](Kleisli%20Categories)
