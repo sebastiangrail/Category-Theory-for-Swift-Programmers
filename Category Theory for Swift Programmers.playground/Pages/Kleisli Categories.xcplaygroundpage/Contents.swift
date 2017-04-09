@@ -25,20 +25,20 @@ func pureLogNegate (b: Bool, logger: String) -> (Bool, String) {
 
 //: `negate` returning log, aggregation happens outside the function
 
-func negate (b: Bool) -> (Bool, String) {
+func negate (_ b: Bool) -> (Bool, String) {
     return (!b, "Not so! ")
 }
 
 
 //: `toUpper` and `toWords`
 
-func toUpper (s: String) -> String {
-    return s.uppercaseString
+func toUpper (_ s: String) -> String {
+    return s.uppercased()
 }
 
 import Foundation
-func toWords (s: String) -> [String] {
-    return s.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+func toWords (_ s: String) -> [String] {
+    return s.components(separatedBy: .whitespacesAndNewlines)
 }
 
 
@@ -51,17 +51,17 @@ struct Writer <T> {
 
 //: `toUpper` and `toWords` returning a writer
 
-func toUpperW (s: String) -> Writer<String> {
+func toUpperW (_ s: String) -> Writer<String> {
     return Writer(value: toUpper(s), string: "toUpper ")
 }
 
-func toWordsW (s: String) -> Writer<[String]> {
+func toWordsW (_ s: String) -> Writer<[String]> {
     return Writer(value: toWords(s), string: "toWords ")
 }
 
 //: manually combining `toUpper` and `toWords`
 
-func processM (s: String) -> Writer<[String]> {
+func processM (_ s: String) -> Writer<[String]> {
     let upper = toUpperW(s)
     let words = toWordsW(upper.value)
     return Writer(value: words.value, string: upper.string + words.string)
@@ -69,7 +69,7 @@ func processM (s: String) -> Writer<[String]> {
 
 
 //: embellished `isEven`
-func isEven (n: Int) -> (Bool, String) {
+func isEven (_ n: Int) -> (Bool, String) {
     return  (n % 2 == 0, "isEven ")
 }
 
@@ -80,7 +80,7 @@ func isOddManually (n: Int) -> (Bool, String) {
     return (result2, log1 + log2)
 }
 
-func compose <A, B, C> (f: A -> Writer<B>, g: B -> Writer<C>) -> A -> Writer<C> {
+func compose <A, B, C> (f: @escaping (A) -> Writer<B>, g: @escaping (B) -> Writer<C>) -> (A) -> Writer<C> {
     return { a in
         let r1 = f(a)
         let r2 = g(r1.value)
@@ -90,7 +90,7 @@ func compose <A, B, C> (f: A -> Writer<B>, g: B -> Writer<C>) -> A -> Writer<C> 
 
 //: We can no create a `process` function using `compose`:
 
-let process = compose(toUpperW, g: toWordsW)
+let process = compose(f: toUpperW, g: toWordsW)
 
 
 //: The `identity` function for `Writer` is just calling the initializer with an empty log string

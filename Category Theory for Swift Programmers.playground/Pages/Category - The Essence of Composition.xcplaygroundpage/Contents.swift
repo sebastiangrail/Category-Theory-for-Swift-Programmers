@@ -15,7 +15,7 @@ func id <T> (x: T) -> T {
 }
 
 //: When the type can be inferred, the identity function can be written as a closure `{ x in x }` or even just `{$0}`
-func intAppliation (g: Int -> Int, n: Int) -> Int {
+func intAppliation (_ g: (Int) -> Int, n: Int) -> Int {
     return g(n)
 }
 intAppliation({$0}, n: 1)

@@ -13,7 +13,7 @@ class Shared <T> {
 }
 
 
-func memoize <T: Hashable, U> (f: T -> U) -> T -> U {
+func memoize <T: Hashable, U> (_ f: @escaping (T) -> U) -> (T) -> U {
     let results = Shared(value: [T: U]())
     return { t in
         if let result = results.value[t] {
@@ -26,7 +26,7 @@ func memoize <T: Hashable, U> (f: T -> U) -> T -> U {
     }
 }
 
-func fib (n: Int) -> Int {
+func fib (_ n: Int) -> Int {
     switch n {
     case 0, 1:
         return 1
@@ -39,13 +39,13 @@ func fib (n: Int) -> Int {
 
 import Foundation
 
-func timed (f: () -> Void) -> NSTimeInterval {
+func timed (f: () -> Void) -> TimeInterval {
     let start = NSDate()
     f()
     return -start.timeIntervalSinceNow
 }
 
-func slowInc (n: Int) -> Int {
+func slowInc (_ n: Int) -> Int {
     sleep(1)
     return n+1
 }
@@ -77,7 +77,7 @@ extension SingletonSet: Hashable {
     var hashValue: Int { return 0 }
 }
 
-func random (x: SingletonSet) -> UInt32 {
+func random (_ x: SingletonSet) -> UInt32 {
     return arc4random()
 }
 
@@ -95,15 +95,15 @@ memoizedRandom(.Value)
 /*: 3. Most random number generators can be initialized with a seed. Implement a function that takes a seed, calls the random number generator with that seed, and returns the result. Memoize that function. Does it work?
 */
 
-func randomNumberWithSeed (seed: UInt32) -> Int32 {
-    srand(seed)
-    return rand()
+func randomNumber (withSeed seed: Int) -> Int {
+    srand48(seed)
+    return Int(drand48() * Double(Int.max))
 }
 
-randomNumberWithSeed(123)
-randomNumberWithSeed(123)
-randomNumberWithSeed(123)
-let memoizedRandomWithSeed = memoize(randomNumberWithSeed)
+randomNumber(withSeed: 123)
+randomNumber(withSeed: 123)
+randomNumber(withSeed: 123)
+let memoizedRandomWithSeed = memoize(randomNumber(withSeed:))
 memoizedRandomWithSeed(123)
 memoizedRandomWithSeed(123)
 memoizedRandomWithSeed(123)
@@ -116,8 +116,8 @@ memoizedRandomWithSeed(123)
 
 //: 1. factorial
 
-func factorial (n: Int) -> Int {
-    return (1...n).reduce(1, combine: *)
+func factorial (_ n: Int) -> Int {
+    return (1...n).reduce(1, *)
 }
 
 factorial(10)
@@ -135,7 +135,7 @@ memoizedFactorial(10)
 
 //: 3. 
 
-func sayHello (s: SingletonSet) -> Bool {
+func sayHello (_ s: SingletonSet) -> Bool {
     print("Hello!")
     return true
 }
@@ -152,7 +152,7 @@ memoizedF(.Value)
 
 //: 4.
 
-func statefulAdd (x: Int) -> Int {
+func statefulAdd (_ x: Int) -> Int {
     struct Container {
         static var y = 0
     }

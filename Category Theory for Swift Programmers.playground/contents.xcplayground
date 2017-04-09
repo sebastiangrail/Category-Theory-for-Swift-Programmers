@@ -10,5 +10,6 @@
         <page name='Solutions 3'/>
         <page name='Kleisli Categories'/>
         <page name='Solutions 4'/>
+        <page name='Products and Coproducts'/>
     </pages>
 </playground>

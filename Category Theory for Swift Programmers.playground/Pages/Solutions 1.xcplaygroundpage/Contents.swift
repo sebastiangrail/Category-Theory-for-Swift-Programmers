@@ -3,22 +3,11 @@
 //: ### 2. Implement the composition function in your favorite language. It takes two functions as arguments and returns a function that is their composition.
 
 infix operator • { associativity right }
-func • <T,U,V> (lhs: U -> V, rhs: T -> U) -> T -> V {
+func • <T,U,V> (lhs: @escaping (U) -> V, rhs: @escaping (T) -> U) -> (T) -> V {
     return { t in
         return lhs(rhs(t))
     }
 }
-
-//: composition can also be written with automatic currying syntax:
-
-func compose <T,U,V> (lhs: U -> V, rhs: T -> U)(_ t: T) -> V {
-    return lhs(rhs(t))
-}
-
-//: This makes `compose` and `•` equvialent
-
-
-
 
 
 /*: ### 3. Write a program that tries to test that your composition function respects identity.
@@ -29,7 +18,7 @@ Just like Haskell, Swift doesn't define equality for functions, so the best we c
 
 func id <T> (x: T) -> T { return x }
 
-func testIdentity <T, U: Equatable> (numberOfSamples: Int = 1000, generator: () -> T, f: T -> U) -> Bool {
+func testIdentity <T, U: Equatable> (numberOfSamples: Int = 1000, generator: () -> T, f: @escaping (T) -> U) -> Bool {
     return Array(1..<numberOfSamples)
         .map { _ in generator() }
         .reduce(true) { (acc, value) in

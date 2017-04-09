@@ -5,7 +5,7 @@
 protocol Monoid {
     static var empty: Self { get }
     
-    func append (other: Self) -> Self
+    func append (_ other: Self) -> Self
 }
 
 struct And: Monoid {
@@ -13,7 +13,7 @@ struct And: Monoid {
     
     static var empty: And { return And(value: true) }
     
-    func append (other: And) -> And {
+    func append (_ other: And) -> And {
         return And(value: self.value && other.value)
     }
 }
@@ -24,7 +24,7 @@ struct Or: Monoid {
     
     static var empty: Or { return Or(value: false) }
     
-    func append (other: Or) -> Or {
+    func append (_ other: Or) -> Or {
         return Or(value: self.value || other.value)
     }
 }
@@ -55,7 +55,7 @@ struct SumMod3: Monoid {
     
     static var empty: SumMod3 { return SumMod3(0) }
     
-    func append (other: SumMod3) -> SumMod3 {
+    func append (_ other: SumMod3) -> SumMod3 {
         return SumMod3(self.value + other.value)
     }
     

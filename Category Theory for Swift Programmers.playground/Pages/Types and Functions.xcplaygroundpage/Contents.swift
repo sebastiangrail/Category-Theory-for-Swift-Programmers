@@ -8,24 +8,18 @@
 
 
 # ⊥ (bottom) in Swift
+ 
+Swift 3 introduces the `Never` type which is an enum without any cases, so that in can never be constructed.
 
 
 ### A function returning ⊥
 
 First, we need a value like Haskell's `undefined :: a`.
 In Swift values need to have concrete types so we can't create a value that can have any type. Instead we can create a function that can return any type `undefined: () -> T`.
-We need to mark the function as `@noreturn` to indicate that like `⊥`, it corresponds to a non-terminating computation.
+Calling `fatalError` inside the function tells the compiler that this will halt the programm (`fatalError()` returns `Never`, which is the same as ⊥. We can use `undefined()` to satisfy the type checker for any type, but once executed, it will crash at runtime.
 */
 
-@noreturn func undefined <T> () -> T { }
-
-//: Now we can implement a function `f: T -> U` that explicitly returns `⊥`:
-
-func f <T,U> (x: T) -> U {
-    return undefined()
-}
-
-//: The Swift compiler corretly warns us that the return statement will never be executed and when we actually try to call `f`, the program crashes at runtime.
+func undefined <T> () -> T { fatalError() }
 
 
 /*: ### The Empty Set
@@ -35,10 +29,10 @@ In Swift, an `enum` with no `case`s cannot be constructed. We can thus define th
 enum EmptySet { }
 
 /*: ### `absurd` in Swift
-Note that this function can never be called as there is no value in the empty set that we could pass in as an argument
+Note that this function can never be called as there is no value in the empty set that we could pass in as an argument. Instead of `EmptySet` we could also use `Never`.
 */
 
-@noreturn func absurd <T> (_: EmptySet) -> T {}
+func absurd <T> (_: EmptySet) -> T { return undefined() }
 
 
 /*" ### The singleton set
